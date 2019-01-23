@@ -115,15 +115,27 @@ Juego.capturarMovimiento = function(tecla) {
   // El movimiento esta determinado por la velocidad del jugador
   if (tecla == 'izq') {
     movX = -velocidad;
+    Jugador.sprite = 'imagenes/auto_rojo_izquierda.png'
+    Jugador.alto = 15;
+    Jugador.ancho = 30;
   }
   if (tecla == 'arriba') {
     movY = -velocidad;
+    Jugador.sprite = 'imagenes/auto_rojo_arriba.png'
+    Jugador.ancho = 15;
+    Jugador.alto = 30;
   }
   if (tecla == 'der') {
     movX = velocidad;
+    Jugador.sprite = 'imagenes/auto_rojo_derecha.png'
+    Jugador.alto = 15;
+    Jugador.ancho = 30;
   }
   if (tecla == 'abajo') {
     movY = velocidad;
+    Jugador.sprite = 'imagenes/auto_rojo_abajo.png'
+    Jugador.ancho = 15;
+    Jugador.alto = 30;
   }
 
   // Si se puede mover hacia esa posicion hay que hacer efectivo este movimiento
@@ -131,7 +143,8 @@ Juego.capturarMovimiento = function(tecla) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
 
-    /* COMPLETAR */
+    Jugador.x += movX;
+    Jugador.y += movY;
   }
 };
 
@@ -146,7 +159,7 @@ Juego.dibujar = function() {
   utilizando al dibujante y los metodos que nos brinda.
   "Dibujante dibuja al jugador" */
 
-  /* Completar */
+  Dibujante.dibujarEntidad(Jugador);
 
   // Se recorren los obstaculos de la carretera pintandolos
   this.obstaculosCarretera.forEach(function(obstaculo) {
@@ -167,7 +180,10 @@ Juego.dibujar = function() {
   }
 };
 
-
+// El Jugador pierde vidas
+Jugador.perderVidas = function(cantVidas) {
+  this.vidas -= cantVidas;
+}
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
 un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
