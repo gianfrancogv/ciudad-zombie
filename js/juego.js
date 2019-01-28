@@ -9,7 +9,7 @@ El objeto Juego contiene mucho codigo. Tomate tu tiempo para leerlo tranquilo
 y entender que es lo que hace en cada una de sus partes. */
 
 var Juego = {
-  // Aca se configura el tamanio del canvas del juego
+  // Aca se configura el tamaño del canvas del juego
   anchoCanvas: 961,
   altoCanvas: 577,
   jugador: Jugador,
@@ -17,24 +17,23 @@ var Juego = {
   // Indica si el jugador gano
   ganador: false,
 
+  //Obstáculos visibles carretera
   obstaculosCarretera: [
-    /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
-    de ejemplo, pero podras agregar muchos mas. */
-    
-    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
-    new Obstaculo('imagenes/bache.png', 800, 500, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 80, 360, 15, 30, 1),
     new Obstaculo('imagenes/auto_verde_abajo.png', 780, 200, 15, 30, 1),
-    new Obstaculo('imagenes/auto_verde_derecha.png', 450, 110, 30, 15, 1),
-    new Obstaculo('imagenes/valla_horizontal.png', 280, 200, 30, 30, 1),
-    new Obstaculo('imagenes/valla_vertical.png', 460, 300, 30, 30, 1),
-    new Obstaculo('imagenes/bache.png', 460, 450, 30, 30, 1),
-    new Obstaculo('imagenes/valla_vertical.png', 520, 470, 30, 30, 1),
-    new Obstaculo('imagenes/valla_horizontal.png', 420, 380, 30, 30, 1),
-    new Obstaculo('imagenes/valla_vertical.png', 300, 430, 30, 30, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 830, 100, 15, 30, 1),
+    new Obstaculo('imagenes/auto_verde_derecha.png', 450, 90, 30, 15, 1),
     new Obstaculo('imagenes/bache.png', 150, 280, 30, 30, 1),
-    new Obstaculo('imagenes/auto_verde_abajo.png', 830, 100, 15, 30, 1)
-
+    new Obstaculo('imagenes/bache.png', 460, 450, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 800, 500, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 420, 380, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 280, 200, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 300, 400, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 460, 300, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 520, 470, 30, 30, 1)
   ],
+
   /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
    Ya estan ubicados en sus lugares correspondientes. Ya aparecen en el mapa, ya
    que son invisibles. No tenes que preocuparte por ellos.*/
@@ -225,29 +224,36 @@ Juego.calcularAtaques = function() {
 /* Aca se chequea si el jugador se peude mover a la posicion destino.
  Es decir, que no haya obstaculos que se interpongan. De ser asi, no podra moverse */
 Juego.chequearColisiones = function(x, y) {
-  var puedeMoverse = true
+  var puedeMoverse = true;
   this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
-
+      if (obstaculo.sprite === 'imagenes/auto_verde_abajo.png') {
+        Jugador.perderVidas(2);
+      } 
+      else if (obstaculo.sprite === 'imagenes/auto_verde_derecha.png') {
+        Jugador.perderVidas(2);
+      }
+      else {
+        Jugador.perderVidas(1);
+      }
       /*COMPLETAR, obstaculo debe chocar al jugador*/
-
-      puedeMoverse = false
+      puedeMoverse = false;
     }
-  }, this)
-  return puedeMoverse
+  }, this);
+  return puedeMoverse;
 };
 
 /* Este metodo chequea si los elementos 1 y 2 si cruzan en x e y
  x e y representan la coordenada a la cual se quiere mover el elemento2*/
 Juego.intersecan = function(elemento1, elemento2, x, y) {
-  var izquierda1 = elemento1.x
-  var derecha1 = izquierda1 + elemento1.ancho
-  var techo1 = elemento1.y
-  var piso1 = techo1 + elemento1.alto
-  var izquierda2 = x
-  var derecha2 = izquierda2 + elemento2.ancho
-  var techo2 = y
-  var piso2 = y + elemento2.alto
+  var izquierda1 = elemento1.x;
+  var derecha1 = izquierda1 + elemento1.ancho;
+  var techo1 = elemento1.y;
+  var piso1 = techo1 + elemento1.alto;
+  var izquierda2 = x;
+  var derecha2 = izquierda2 + elemento2.ancho;
+  var techo2 = y;
+  var piso2 = y + elemento2.alto;
 
   return ((piso1 >= techo2) && (techo1 <= piso2) &&
     (derecha1 >= izquierda2) && (izquierda1 <= derecha2))
