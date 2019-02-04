@@ -19,19 +19,19 @@ var Juego = {
 
   //Obstáculos visibles carretera
   obstaculosCarretera: [
-    new Obstaculo('imagenes/auto_verde_abajo.png', 80, 360, 15, 30, 1),
-    new Obstaculo('imagenes/auto_verde_abajo.png', 780, 200, 15, 30, 1),
-    new Obstaculo('imagenes/auto_verde_abajo.png', 830, 100, 15, 30, 1),
-    new Obstaculo('imagenes/auto_verde_derecha.png', 450, 90, 30, 15, 1),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 80, 360, 15, 30, 3),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 780, 200, 15, 30, 3),
+    new Obstaculo('imagenes/auto_verde_abajo.png', 830, 100, 15, 30, 3),
+    new Obstaculo('imagenes/auto_verde_derecha.png', 450, 90, 30, 15, 3),
     new Obstaculo('imagenes/bache.png', 150, 280, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 460, 450, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 800, 500, 30, 30, 1),
-    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
-    new Obstaculo('imagenes/valla_horizontal.png', 420, 380, 30, 30, 1),
-    new Obstaculo('imagenes/valla_vertical.png', 280, 200, 30, 30, 1),
-    new Obstaculo('imagenes/valla_vertical.png', 300, 400, 30, 30, 1),
-    new Obstaculo('imagenes/valla_vertical.png', 460, 300, 30, 30, 1),
-    new Obstaculo('imagenes/valla_vertical.png', 520, 470, 30, 30, 1)
+    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 2),
+    new Obstaculo('imagenes/valla_horizontal.png', 420, 380, 30, 30, 2),
+    new Obstaculo('imagenes/valla_vertical.png', 280, 200, 30, 30, 2),
+    new Obstaculo('imagenes/valla_vertical.png', 300, 400, 30, 30, 2),
+    new Obstaculo('imagenes/valla_vertical.png', 460, 300, 30, 30, 2),
+    new Obstaculo('imagenes/valla_vertical.png', 520, 470, 30, 30, 2)
   ],
 
   /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
@@ -151,9 +151,6 @@ Juego.capturarMovimiento = function(tecla) {
 
   // Si se puede mover hacia esa posicion hay que hacer efectivo este movimiento
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
-    /* Aca tiene que estar la logica para mover al jugador invocando alguno
-    de sus metodos  */
-
     Jugador.x += movX;
     Jugador.y += movY;
   }
@@ -165,11 +162,7 @@ Juego.dibujar = function() {
   //Se pinta la imagen de fondo segun el estado del juego
   this.dibujarFondo();
 
-
-  /* Aca hay que agregar la logica para poder dibujar al jugador principal
-  utilizando al dibujante y los metodos que nos brinda.
-  "Dibujante dibuja al jugador" */
-
+  // "Dibujante dibuja al jugador"
   Dibujante.dibujarEntidad(Jugador);
 
   // Se recorren los obstaculos de la carretera pintandolos
@@ -179,7 +172,7 @@ Juego.dibujar = function() {
 
   // Se recorren los enemigos pintandolos
   this.enemigos.forEach(function(enemigo) {
-    /* Completar */
+    
   });
 
   // El dibujante dibuja las vidas del jugador
@@ -227,16 +220,18 @@ Juego.chequearColisiones = function(x, y) {
   var puedeMoverse = true;
   this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
-      if (obstaculo.sprite === 'imagenes/auto_verde_abajo.png') {
-        Jugador.perderVidas(2);
-      } 
-      else if (obstaculo.sprite === 'imagenes/auto_verde_derecha.png') {
-        Jugador.perderVidas(2);
+      if (obstaculo.sprite === 'imagenes/auto_verde_abajo.png' || obstaculo.sprite === 'imagenes/auto_verde_derecha.png') {
+      Jugador.perderVidas(obstaculo.potencia);
+      obstaculo.potencia = 0;
+      } else if (obstaculo.sprite === 'imagenes/bache.png') {
+      Jugador.perderVidas(obstaculo.potencia);
+      obstaculo.potencia = 0;
+      } else if (obstaculo.sprite === 'imagenes/valla_horizontal.png' || obstaculo.sprite === 'imagenes/valla_vertical.png') {
+      Jugador.perderVidas(obstaculo.potencia);
+      obstaculo.potencia = 0;
+      } else {
+      Jugador.perderVidas(0);
       }
-      else {
-        Jugador.perderVidas(1);
-      }
-      /*COMPLETAR, obstaculo debe chocar al jugador*/
       puedeMoverse = false;
     }
   }, this);
