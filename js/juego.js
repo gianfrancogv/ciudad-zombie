@@ -56,17 +56,16 @@ var Juego = {
   
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-    new ZombieCaminante('imagenes/zombie1.png', 100, 280, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie1.png', 500, 250, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie2.png', 350, 480, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie3.png', 850, 220, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie3.png', 770, 480, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie4.png', 600, 100, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieCaminante('imagenes/zombie4.png', 550, 400, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}),
-    new ZombieConductor('imagenes/tren_horizontal.png', 20, 325, 90, 30, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}, 1),
-    new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}, 1),
-    new ZombieConductor('imagenes/tren_vertical.png', 674, 0, 30, 90, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961}, 1)
-
+    new ZombieCaminante('imagenes/zombie1.png', 100, 280, 10, 10, 1, {desdeX: 80, hastaX: 140, desdeY: 200, hastaY: 350}),
+    new ZombieCaminante('imagenes/zombie1.png', 500, 250, 10, 10, 1, {desdeX: 470, hastaX: 540, desdeY: 200, hastaY: 300}),
+    new ZombieCaminante('imagenes/zombie2.png', 350, 480, 10, 10, 1, {desdeX: 330, hastaX: 370, desdeY: 450, hastaY: 530}),
+    new ZombieCaminante('imagenes/zombie3.png', 850, 220, 10, 10, 1, {desdeX: 800, hastaX: 870, desdeY: 200, hastaY: 250}),
+    new ZombieCaminante('imagenes/zombie3.png', 770, 480, 10, 10, 1, {desdeX: 765, hastaX: 810, desdeY: 450, hastaY: 500}),
+    new ZombieCaminante('imagenes/zombie4.png', 600, 100, 10, 10, 1, {desdeX: 550, hastaX: 620, desdeY: 80, hastaY: 120}),
+    new ZombieCaminante('imagenes/zombie4.png', 550, 400, 10, 10, 1, {desdeX: 500, hastaX: 580, desdeY: 350, hastaY: 420}),
+    new ZombieConductor('imagenes/tren_horizontal.png', 20, 325, 90, 30, 10, {desdeX: 0, hastaX: 860, desdeY: 325, hastaY: 325}, 'h'),
+    new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 10, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 577}, 'v'),
+    new ZombieConductor('imagenes/tren_vertical.png', 674, 0, 30, 90, 10, {desdeX: 674, hastaX: 674, desdeY: 0, hastaY: 577}, 'v')
   ]
 
 }
@@ -204,7 +203,9 @@ Jugador.perderVidas = function(cantVidas) {
 un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
-  /* COMPLETAR */
+  this.enemigos.forEach(function(enemigo){
+    enemigo.mover();
+  }) 
 };
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
