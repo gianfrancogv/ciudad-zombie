@@ -25,7 +25,7 @@ var Juego = {
     new Obstaculo('imagenes/auto_verde_derecha.png', 450, 90, 30, 15, 3),
     new Obstaculo('imagenes/bache.png', 150, 280, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 460, 450, 30, 30, 1),
-    new Obstaculo('imagenes/bache.png', 800, 500, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 850, 400, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 2),
     new Obstaculo('imagenes/valla_horizontal.png', 420, 380, 30, 30, 2),
     new Obstaculo('imagenes/valla_vertical.png', 280, 200, 30, 30, 2),
@@ -55,7 +55,7 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
-
+    new ZombieCaminante('imagenes/zombie1.png', 100, 280, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961})
   ]
 
 }
@@ -153,7 +153,7 @@ Juego.capturarMovimiento = function(tecla) {
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     Jugador.x += movX;
     Jugador.y += movY;
-  }
+  };
 };
 
 Juego.dibujar = function() {
@@ -172,7 +172,7 @@ Juego.dibujar = function() {
 
   // Se recorren los enemigos pintandolos
   this.enemigos.forEach(function(enemigo) {
-    
+    Dibujante.dibujarEntidad(enemigo);
   });
 
   // El dibujante dibuja las vidas del jugador
