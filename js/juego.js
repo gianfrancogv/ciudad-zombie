@@ -53,9 +53,14 @@ var Juego = {
     new Obstaculo('', 279, 23, 664, 56, 2),
     new Obstaculo('', 887, 79, 56, 480, 2)
   ],
+  
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
     new ZombieCaminante('imagenes/zombie1.png', 100, 280, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961})
+    new ZombieCaminante('imagenes/zombie1.png', 500, 250, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961})
+    new ZombieCaminante('imagenes/zombie1.png', 350, 480, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961})
+    new ZombieCaminante('imagenes/zombie1.png', 850, 220, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961})
+    new ZombieCaminante('imagenes/zombie1.png', 600, 100, 10, 10, 10, {desdeX: 0, hastaX: 577, desdeY: 0, hastaY: 961})
   ]
 
 }
