@@ -15,16 +15,11 @@ ZombieConductor.prototype.constructor = ZombieConductor;
 
 /* Completar metodos para el movimiento y el ataque */
 ZombieConductor.prototype.mover = function() {
-    /* Los movimientos estan basados en un numero aleatorio
-  La direccion horizontal es siempre la misma y va ondulando verticalmente.
-  Esto hasta llegar a sus limites, donde se invierte su direccion horizontal */
-  if (Math.random() < 0.5) {
-    this.x -= this.velocidad;
-    this.y -= this.velocidad;
-  } else {
-    //Sino, hace otro movimiento
+/* Verificamos si el movimiento es horizontal o vertical */
+  if (this.direccion == 'v') {
     this.y += this.velocidad;
-    this.x -= this.velocidad;
+  } else {
+    this.x += this.velocidad;
   }
 
   /* En esta parte lo que hacemos es invertir la direccion horizontal si
@@ -35,6 +30,6 @@ ZombieConductor.prototype.mover = function() {
   }
   // Si sobrepasa el rangoY, lo manda al centro entre ambos rangos
   if ((this.y < this.rangoMov.desdeY) || (this.y > this.rangoMov.hastaY)) {
-    this.y = this.rangoMov.desdeY + (this.rangoMov.hastaY - this.rangoMov.desdeY)/2;
+    this.velocidad *= -1;
   }
 }

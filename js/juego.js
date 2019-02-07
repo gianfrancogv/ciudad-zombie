@@ -63,9 +63,9 @@ var Juego = {
     new ZombieCaminante('imagenes/zombie3.png', 770, 480, 10, 10, 1, {desdeX: 765, hastaX: 810, desdeY: 450, hastaY: 500}),
     new ZombieCaminante('imagenes/zombie4.png', 600, 100, 10, 10, 1, {desdeX: 550, hastaX: 620, desdeY: 80, hastaY: 120}),
     new ZombieCaminante('imagenes/zombie4.png', 550, 400, 10, 10, 1, {desdeX: 500, hastaX: 580, desdeY: 350, hastaY: 420}),
-    new ZombieConductor('imagenes/tren_horizontal.png', 20, 325, 90, 30, 10, {desdeX: 0, hastaX: 860, desdeY: 325, hastaY: 325}, 'h'),
-    new ZombieConductor('imagenes/tren_vertical.png', 644, 0, 30, 90, 10, {desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 577}, 'v'),
-    new ZombieConductor('imagenes/tren_vertical.png', 674, 0, 30, 90, 10, {desdeX: 674, hastaX: 674, desdeY: 0, hastaY: 577}, 'v')
+    new ZombieConductor('imagenes/tren_horizontal.png', 20, 325, 90, 30, 6, {desdeX: 0, hastaX: 860, desdeY: 325, hastaY: 325}, 'h'),
+    new ZombieConductor('imagenes/tren_vertical.png', 644, 40, 30, 90, 4, {desdeX: 644, hastaX: 644, desdeY: 30, hastaY: 470}, 'v'),
+    new ZombieConductor('imagenes/tren_vertical.png', 674, 40, 30, 90, 6, {desdeX: 674, hastaX: 674, desdeY: 30, hastaY: 470}, 'v')
   ]
 
 }
