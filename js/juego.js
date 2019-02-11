@@ -93,7 +93,8 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_rojo_derecha.png',
     'imagenes/auto_rojo_izquierda.png',
     'imagenes/auto_verde_abajo.png',
-    'imagenes/auto_verde_derecha.png'
+    'imagenes/auto_verde_derecha.png',
+    'imagenes/llegada.png'
   ]);
   Resources.onReady(this.comenzar.bind(Juego));
 };
@@ -197,7 +198,10 @@ Juego.dibujar = function() {
   for (var i = 0; i < this.jugador.vidas; i++) {
     var x = tamanio * i
     Dibujante.dibujarRectangulo('red', x, 0, tamanio, 8);
-  }
+  };
+
+  // El dibujante dibuja la meta
+    Dibujante.dibujarImagen('imagenes/llegada.png', 760, 529, 126, 20);
 };
 
 // El Jugador pierde vidas
