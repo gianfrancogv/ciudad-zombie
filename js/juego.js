@@ -201,7 +201,7 @@ Juego.dibujar = function() {
   };
 
   // El dibujante dibuja la meta
-    Dibujante.dibujarImagen('imagenes/llegada.png', 760, 529, 126, 20);
+    Dibujante.dibujarImagen('imagenes/llegada.png', 760, 519, 126, 20);
 };
 
 // El Jugador pierde vidas
@@ -277,14 +277,16 @@ Juego.intersecan = function(elemento1, elemento2, x, y) {
 Juego.dibujarFondo = function() {
   // Si se termino el juego hay que mostrar el mensaje de game over de fondo
   if (this.terminoJuego()) {
-    Dibujante.dibujarImagen('imagenes/mensaje_gameover.png', 0, 5, this.anchoCanvas, this.altoCanvas);
+    var gameOver = Dibujante.dibujarImagen('imagenes/mensaje_gameover.png', 0, 5, this.anchoCanvas, this.altoCanvas);
+    gameOver.style.visibility = 'visible';
     document.getElementById('reiniciar').style.visibility = 'visible';
   }
 
   // Si se gano el juego hay que mostrar el mensaje de ganoJuego de fondo
   else if (this.ganoJuego()) {
-    Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
+    var splash = Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
     document.getElementById('reiniciar').style.visibility = 'visible';
+    splash.style.visibility = 'visible';
   } else {
     Dibujante.dibujarImagen('imagenes/mapa.png', 0, 5, this.anchoCanvas, this.altoCanvas);
   }
