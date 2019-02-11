@@ -14,7 +14,7 @@ var Juego = {
   altoCanvas: 577,
   jugador: Jugador,
   vidasInicial: Jugador.vidas,
-  // Indica si el jugador gano
+  // Indica si el jugador ganó
   ganador: false,
 
   //Obstáculos visibles carretera
@@ -34,11 +34,11 @@ var Juego = {
     new Obstaculo('imagenes/valla_vertical.png', 520, 470, 30, 30, 2)
   ],
 
-  /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
+  /* Bordes con los que se puede chocar, por ejemplo, la vereda.
    Ya estan ubicados en sus lugares correspondientes. Ya aparecen en el mapa, ya
    que son invisibles. No tenes que preocuparte por ellos.*/
   bordes: [
-    // // Bordes
+    // Bordes
     new Obstaculo('', 0, 5, 961, 18, 0),
     new Obstaculo('', 0, 559, 961, 18, 0),
     new Obstaculo('', 0, 5, 18, 572, 0),
@@ -54,7 +54,7 @@ var Juego = {
     new Obstaculo('', 887, 79, 56, 480, 2)
   ],
   
-  // Los enemigos se agregaran en este arreglo.
+  // Los enemigos
   enemigos: [
     new ZombieCaminante('imagenes/zombie1.png', 100, 280, 10, 10, 1, {desdeX: 80, hastaX: 140, desdeY: 200, hastaY: 350}),
     new ZombieCaminante('imagenes/zombie1.png', 500, 250, 10, 10, 1, {desdeX: 470, hastaX: 540, desdeY: 200, hastaY: 300}),
@@ -98,7 +98,7 @@ Juego.iniciarRecursos = function() {
   Resources.onReady(this.comenzar.bind(Juego));
 };
 
-// Agrega los bordes de las veredas a los obstaculos de la carretera
+// Agrega los bordes de las veredas a los obstaculos de la carretera:
 Juego.obstaculos = function() {
   return this.obstaculosCarretera.concat(this.bordes);
 };
@@ -133,31 +133,37 @@ Juego.capturarMovimiento = function(tecla) {
   var movY = 0;
   var velocidad = this.jugador.velocidad;
 
-  // El movimiento esta determinado por la velocidad del jugador
-  if (tecla == 'izq') {
-    movX = -velocidad;
-    Jugador.sprite = 'imagenes/auto_rojo_izquierda.png'
-    Jugador.alto = 15;
-    Jugador.ancho = 30;
-  }
-  if (tecla == 'arriba') {
-    movY = -velocidad;
-    Jugador.sprite = 'imagenes/auto_rojo_arriba.png'
-    Jugador.ancho = 15;
-    Jugador.alto = 30;
-  }
-  if (tecla == 'der') {
-    movX = velocidad;
-    Jugador.sprite = 'imagenes/auto_rojo_derecha.png'
-    Jugador.alto = 15;
-    Jugador.ancho = 30;
-  }
-  if (tecla == 'abajo') {
-    movY = velocidad;
-    Jugador.sprite = 'imagenes/auto_rojo_abajo.png'
-    Jugador.ancho = 15;
-    Jugador.alto = 30;
-  }
+  // El movimiento esta determinado por la velocidad del jugador:
+
+  switch (tecla) {
+    case 'izq':
+      movX = -velocidad;
+      Jugador.sprite = 'imagenes/auto_rojo_izquierda.png'
+      Jugador.alto = 15;
+      Jugador.ancho = 30;
+      break;
+
+    case 'arriba':
+      movY = -velocidad;
+      Jugador.sprite = 'imagenes/auto_rojo_arriba.png'
+      Jugador.ancho = 15;
+      Jugador.alto = 30;
+      break;
+    
+    case 'der':
+      movX = velocidad;
+      Jugador.sprite = 'imagenes/auto_rojo_derecha.png'
+      Jugador.alto = 15;
+      Jugador.ancho = 30;
+      break;
+
+    case 'abajo':
+      movY = velocidad;
+      Jugador.sprite = 'imagenes/auto_rojo_abajo.png'
+      Jugador.ancho = 15;
+      Jugador.alto = 30;
+      break;
+  };
 
   // Si se puede mover hacia esa posicion hay que hacer efectivo este movimiento
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
@@ -215,11 +221,11 @@ se ven las colisiones con los obstaculos. En este caso sera con los zombies. */
 Juego.calcularAtaques = function() {
   this.enemigos.forEach(function(enemigo) {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
-      /* Si el enemigo colisiona debe empezar su ataque
-      COMPLETAR */
+      /* Si el enemigo colisiona debe empezar su ataque*/
+      enemigo.comenzarAtaque(Jugador);
     } else {
-      /* Sino, debe dejar de atacar
-      COMPLETAR */
+      /* Sino, debe dejar de atacar*/
+      enemigo.dejarDeAtacar();
     }
   }, this);
 };
